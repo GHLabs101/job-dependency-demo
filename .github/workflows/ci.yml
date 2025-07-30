@@ -15,12 +15,16 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Test step
-        run: echo "✅ Running tests..."
+      - name: Run tests
+        run: npm test
+      # Optional: Uncomment to simulate failure
+      # - name: Simulate test failure
+      #   run: exit 1
 
   deploy:
     needs: test
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy step
-        run: echo "🚀 Deploying application..."
+      - name: Conditional deploy
+        run: echo "Deploying to production branch..."
