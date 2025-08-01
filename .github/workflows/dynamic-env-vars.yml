@@ -11,3 +11,19 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+      - name: Generate timestamp
+        id: generate
+        run: echo "TIMESTAMP=$(date +%s)" >> $GITHUB_ENV
+      - name: Use TIMESTAMP variable
+        run: echo "The generated timestamp is $TIMESTAMP"
+      - name: Set multiple dynamic vars
+        run: |
+          echo "BUILD_ID=build-$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+          echo "DEPLOY_ENV=staging" >> $GITHUB_ENV
+      - name: Print BUILD_ID and DEPLOY_ENV
+        run: |
+          echo "Build ID: $BUILD_ID"
+          echo "Deploy Env: $DEPLOY_ENV"
+
+
+
